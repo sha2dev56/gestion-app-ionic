@@ -1,0 +1,14 @@
+.login {
+  max-width: 420px;
+  margin: 8vh auto 0;
+}
+
+.campo,
+.boton {
+  margin-top: 16px;
+}
+
+.error {
+  color: var(--ion-color-danger-shade);
+  margin: 12px 0 0;
+}
