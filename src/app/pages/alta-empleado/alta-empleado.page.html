@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Alta de empleado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <main class="alta">
+    <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+      <ion-input
+        label="Nombre completo"
+        labelPlacement="floating"
+        fill="outline"
+        autocomplete="name"
+        formControlName="nombre"
+        errorText="El nombre es obligatorio (mínimo 3 caracteres)"
+      ></ion-input>
+
+      <ion-input
+        class="campo"
+        label="Correo electrónico"
+        labelPlacement="floating"
+        fill="outline"
+        type="email"
+        autocomplete="email"
+        formControlName="email"
+        [errorText]="mensajeEmail()"
+        [helperText]="form.controls.email.pending ? 'Comprobando disponibilidad…' : ''"
+      ></ion-input>
+
+      <ion-select
+        class="campo"
+        label="Departamento"
+        labelPlacement="floating"
+        fill="outline"
+        interface="popover"
+        formControlName="departamento"
+      >
+        @for (d of departamentos; track d) {
+          <ion-select-option [value]="d">{{ d }}</ion-select-option>
+        }
+      </ion-select>
+      @if (form.controls.departamento.touched && form.controls.departamento.invalid) {
+        <p class="error" role="alert">Selecciona un departamento</p>
+      }
+
+      <ion-toggle class="campo" formControlName="activo">Empleado activo</ion-toggle>
+
+      @if (errorGuardado()) {
+        <p class="error" role="alert">{{ errorGuardado() }}</p>
+      }
+
+      <ion-button
+        class="campo"
+        type="submit"
+        expand="block"
+        [disabled]="guardando() || form.pending"
+      >
+        @if (guardando()) {
+          <ion-spinner name="crescent" aria-label="Guardando registro"></ion-spinner>
+        } @else {
+          Dar de alta
+        }
+      </ion-button>
+    </form>
+  </main>
+</ion-content>
