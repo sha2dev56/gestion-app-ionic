@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/angular';
 
 /** Cabecera común de las páginas con botón de menú lateral. */
 @Component({

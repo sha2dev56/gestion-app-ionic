@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonButton, IonContent } from '@ionic/angular/standalone';
+import { IonButton, IonContent } from '@ionic/angular';
 import { PageHeaderComponent } from '../../shared/page-header/page-header.component';
 
 @Component({

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular';
 import { PageHeaderComponent } from '../../shared/page-header/page-header.component';
 
 /** Manual de usuario integrado en la aplicación. */

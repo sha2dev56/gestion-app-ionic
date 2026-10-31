@@ -74,7 +74,12 @@ export class AuthService {
   /** Inicia sesión con Supabase Auth y lee el rol desde la tabla `profiles`. */
   private async loginSupabase(sb: SupabaseClient, email: string, password: string): Promise<Session> {
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
-    if (error || !data.session) throw new HttpErrorResponse({ status: error?.status === 400 ? 401 : (error?.status ?? 401) });
+    if (error || !data.session) {
+      throw new HttpErrorResponse({
+        status: error?.status === 400 ? 401 : (error?.status ?? 401),
+        error: { code: error?.code, message: error?.message },
+      });
+    }
 
     const { data: perfil, error: perfilError } = await sb
       .from('profiles')

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IonButton, IonContent, IonSpinner } from '@ionic/angular/standalone';
+import { IonButton, IonContent, IonSpinner } from '@ionic/angular';
 import { ApiService } from '../../core/api.service';
 import { ExportService } from '../../core/export.service';
 import { Producto, TableColumn, TableRow } from '../../core/models';

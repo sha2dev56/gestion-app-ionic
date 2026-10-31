@@ -2,7 +2,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
-import { provideIonicAngular } from '@ionic/angular/standalone';
+import { provideIonicAngular } from '@ionic/angular';
 import { authInterceptor } from './core/auth.interceptor';
 import { mockBackendInterceptor } from './core/mock-backend.interceptor';
 import { environment } from '../environments/environment';

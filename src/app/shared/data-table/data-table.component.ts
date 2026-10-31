@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input, output, signal } from '@angular/core';
-import { IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonButton, IonIcon } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline, chevronForwardOutline, swapVerticalOutline } from 'ionicons/icons';
 import { TableColumn, TableRow } from '../../core/models';

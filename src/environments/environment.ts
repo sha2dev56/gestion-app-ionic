@@ -4,7 +4,6 @@ export const environment = {
   production: false,
   /** Latencia simulada (ms) del backend de demostración. */
   mockLatency: 350,
-  /** Si url y anonKey están vacías se usa el backend simulado. */
-  supabaseUrl: supabaseConfig.url,
-  supabaseAnonKey: supabaseConfig.anonKey,
+   supabaseUrl: 'https://hsfbntkgxxvvrsruluoa.supabase.co',
+  supabaseAnonKey: 'sb_publishable_HX8QAIFGIB8V4_RKlJIoFA_BK4drXDA',
 };

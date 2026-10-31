@@ -9,7 +9,7 @@ import {
   IonSelect,
   IonSelectOption,
   IonSpinner,
-} from '@ionic/angular/standalone';
+} from '@ionic/angular';
 import { ApiService } from '../../core/api.service';
 import { Role, TableColumn, TableRow, Usuario } from '../../core/models';
 import { emailLibreValidator } from '../../core/validators';

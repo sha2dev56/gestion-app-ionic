@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonButton, IonContent, IonInput, IonSpinner } from '@ionic/angular/standalone';
+import { IonButton, IonContent, IonInput, IonSpinner } from '@ionic/angular';
 import { finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../core/auth.service';
@@ -87,6 +87,15 @@ export class LoginPage {
     return control.invalid && (control.touched || control.dirty);
   }
 
+  private mensajeError(err: unknown): string {
+    if (!(err instanceof HttpErrorResponse)) return 'No se pudo iniciar sesión. Inténtalo de nuevo.';
+    const code = (err.error as { code?: string } | null)?.code;
+    if (code === 'email_not_confirmed') return 'Debes confirmar tu correo antes de entrar.';
+    if (err.status === 401) return 'Correo o contraseña incorrectos.';
+    if (err.status === 500) return 'Tu usuario no tiene perfil en la base de datos (tabla profiles).';
+    return 'No se pudo conectar con el servidor. Inténtalo de nuevo.';
+  }
+
   protected submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -105,12 +114,7 @@ export class LoginPage {
           const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           void this.router.navigateByUrl(returnUrl?.startsWith('/') ? returnUrl : '/productos');
         },
-        error: (err: unknown) =>
-          this.error.set(
-            err instanceof HttpErrorResponse && err.status === 401
-              ? 'Correo o contraseña incorrectos.'
-              : 'No se pudo conectar con el servidor. Inténtalo de nuevo.',
-          ),
+        error: (err: unknown) => this.error.set(this.mensajeError(err)),
       });
   }
 }

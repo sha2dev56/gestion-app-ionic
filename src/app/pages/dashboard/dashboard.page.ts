@@ -10,7 +10,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IonButton, IonContent, IonSelect, IonSelectOption, IonSpinner } from '@ionic/angular/standalone';
+import { IonButton, IonContent, IonSelect, IonSelectOption, IonSpinner } from '@ionic/angular';
 import { Chart, registerables } from 'chart.js';
 import { first, forkJoin } from 'rxjs';
 import { ApiService } from '../../core/api.service';
