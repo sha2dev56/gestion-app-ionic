@@ -1,0 +1,69 @@
+<div class="table-toolbar">
+  <label class="field-label" [for]="searchId">Buscar en {{ caption() }}</label>
+  <input
+    class="text-input"
+    type="search"
+    [id]="searchId"
+    placeholder="Escribe para filtrar…"
+    autocomplete="off"
+    (input)="onSearch($event)"
+  />
+</div>
+
+<div class="table-scroll" role="region" [attr.aria-label]="'Tabla de ' + caption()" tabindex="0">
+  <table class="data-table">
+    <caption>
+      {{ caption() }} ({{ filtered().length }} resultados)
+    </caption>
+    <thead>
+      <tr>
+        @for (col of columns(); track col.key) {
+          <th scope="col" [attr.aria-sort]="ariaSort(col.key)" [class.num]="col.numeric">
+            <button type="button" class="sort-btn" (click)="sortBy(col.key)">
+              {{ col.label }}
+              <ion-icon name="swap-vertical-outline" aria-hidden="true"></ion-icon>
+              <span class="sr-only">, ordenar</span>
+            </button>
+          </th>
+        }
+        @if (selectable()) {
+          <th scope="col"><span class="sr-only">Acciones</span></th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of visible(); track $index) {
+        <tr>
+          @for (col of columns(); track col.key) {
+            <td [class.num]="col.numeric" [attr.data-label]="col.label">{{ col.format ? col.format(row[col.key]) : row[col.key] }}</td>
+          }
+          @if (selectable()) {
+            <td>
+              <ion-button size="small" fill="outline" (click)="rowSelected.emit(row)">Seleccionar</ion-button>
+            </td>
+          }
+        </tr>
+      } @empty {
+        <tr>
+          <td [attr.colspan]="columns().length + (selectable() ? 1 : 0)">No hay resultados.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<nav class="pager" aria-label="Paginación de {{ caption() }}">
+  <ion-button fill="clear" size="small" [disabled]="page() === 0" (click)="prev()" aria-label="Página anterior">
+    <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+  </ion-button>
+  <span aria-live="polite">Página {{ page() + 1 }} de {{ totalPages() }}</span>
+  <ion-button
+    fill="clear"
+    size="small"
+    [disabled]="page() >= totalPages() - 1"
+    (click)="next()"
+    aria-label="Página siguiente"
+  >
+    <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+  </ion-button>
+</nav>

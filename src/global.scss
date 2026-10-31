@@ -1,0 +1,317 @@
+/* Ionic core */
+@import '@ionic/angular/css/core.css';
+@import '@ionic/angular/css/normalize.css';
+@import '@ionic/angular/css/structure.css';
+@import '@ionic/angular/css/typography.css';
+@import '@ionic/angular/css/padding.css';
+@import '@ionic/angular/css/float-elements.css';
+@import '@ionic/angular/css/text-alignment.css';
+@import '@ionic/angular/css/text-transformation.css';
+@import '@ionic/angular/css/flex-utils.css';
+@import '@ionic/angular/css/display.css';
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+@import './theme/variables.scss';
+
+/* ---------- Accesibilidad ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -4rem;
+  left: 0.5rem;
+  z-index: 10000;
+  padding: 0.75rem 1rem;
+  background: #111827;
+  color: #fff;
+  border-radius: 0 0 0.5rem 0.5rem;
+  transition: top 0.15s;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--app-focus);
+  outline-offset: 2px;
+}
+
+h1[tabindex='-1']:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Layout mobile-first ---------- */
+main {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+}
+
+.muted {
+  color: var(--app-muted);
+}
+
+.field-error {
+  color: var(--app-error);
+  min-height: 1.25rem;
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.9rem;
+}
+
+.field-ok {
+  color: var(--app-muted);
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.auth-card {
+  max-width: 26rem;
+  margin: 2rem auto;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.menu-user {
+  padding: 1rem;
+  border-top: 1px solid var(--app-border);
+  margin-top: 1rem;
+}
+
+.menu-active {
+  --background: rgba(var(--ion-color-primary-rgb), 0.12);
+  font-weight: 600;
+}
+
+/* ---------- Formularios ---------- */
+.field-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.text-input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--app-border);
+  border-radius: 0.5rem;
+  background: var(--app-surface);
+  color: inherit;
+  font: inherit;
+}
+
+ion-input,
+ion-select {
+  margin-top: 0.5rem;
+}
+
+/* ---------- Tabla ---------- */
+.table-toolbar {
+  margin-bottom: 0.75rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--app-border);
+  border-radius: 0.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--app-surface);
+
+  caption {
+    text-align: left;
+    padding: 0.75rem;
+    font-weight: 600;
+  }
+
+  th,
+  td {
+    padding: 0.6rem 0.75rem;
+    border-top: 1px solid var(--app-border);
+    text-align: left;
+  }
+
+  .num {
+    text-align: right;
+  }
+
+  tbody tr:nth-child(even) {
+    background: rgba(var(--ion-color-primary-rgb), 0.05);
+  }
+}
+
+.sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 2.75rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* En móvil la tabla se transforma en tarjetas apiladas */
+@media (max-width: 575px) {
+  .data-table {
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    tr {
+      display: block;
+      border-top: 1px solid var(--app-border);
+      padding: 0.5rem 0;
+    }
+
+    td {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      border: 0;
+      text-align: right;
+
+      &[data-label]::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+/* ---------- Widgets y dashboard ---------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+
+  ion-icon {
+    font-size: 2rem;
+    color: var(--ion-color-primary);
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.stat-label,
+.stat-hint {
+  color: var(--app-muted);
+  font-size: 0.85rem;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.chart-box {
+  position: relative;
+  height: 16rem;
+}
+
+@media (min-width: 576px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Modo de alto contraste del sistema */
+@media (forced-colors: active) {
+  .card,
+  .stat-card,
+  .table-scroll {
+    border: 1px solid CanvasText;
+  }
+}

@@ -1,0 +1,31 @@
+/* Paleta con contraste AA (texto sobre fondo >= 4.5:1). */
+:root {
+  --ion-color-primary: #1e40af;
+  --ion-color-primary-rgb: 30, 64, 175;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1a3a9a;
+  --ion-color-primary-tint: #3554b7;
+
+  --app-surface: #ffffff;
+  --app-border: #cbd5e1;
+  --app-muted: #475569;
+  --app-error: #b91c1c;
+  --app-focus: #f59e0b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-color-primary: #93b4ff;
+    --ion-color-primary-rgb: 147, 180, 255;
+    --ion-color-primary-contrast: #0b1220;
+    --ion-color-primary-contrast-rgb: 11, 18, 32;
+    --ion-color-primary-shade: #81a0e0;
+    --ion-color-primary-tint: #9dbdff;
+
+    --app-surface: #1e293b;
+    --app-border: #475569;
+    --app-muted: #cbd5e1;
+    --app-error: #fca5a5;
+  }
+}
