@@ -128,7 +128,6 @@ export class UsuariosPage {
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly columns: TableColumn[] = [
-    { key: 'id', label: 'ID', numeric: true },
     { key: 'nombre', label: 'Nombre' },
     { key: 'email', label: 'Correo' },
     { key: 'role', label: 'Rol', format: (v) => (v === 'admin' ? 'Administrador' : 'Usuario Estándar') },

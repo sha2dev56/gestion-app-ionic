@@ -14,8 +14,9 @@ import { IonButton, IonContent, IonSelect, IonSelectOption, IonSpinner } from '@
 import { Chart, registerables } from 'chart.js';
 import { first, forkJoin } from 'rxjs';
 import { ApiService } from '../../core/api.service';
+import { AuthService } from '../../core/auth.service';
 import { ExportService } from '../../core/export.service';
-import { Actividad, Producto, TableColumn } from '../../core/models';
+import { Actividad, Producto, TableColumn, TipoActividad } from '../../core/models';
 import { RealtimeService } from '../../core/realtime.service';
 import { PageHeaderComponent } from '../../shared/page-header/page-header.component';
 import { StatWidgetComponent } from '../../shared/stat-widget/stat-widget.component';
@@ -62,6 +63,9 @@ const euros = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR
         <div class="actions" role="group" aria-label="Exportar informes">
           <ion-button fill="outline" (click)="exportCsv()">Exportar CSV</ion-button>
           <ion-button fill="outline" (click)="exportPdf()">Exportar PDF</ion-button>
+          @if (realtime.remoto) {
+            <ion-button (click)="simularEvento()">Simular evento en tiempo real</ion-button>
+          }
         </div>
 
         <div class="chart-grid">
@@ -92,7 +96,8 @@ const euros = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR
 })
 export class DashboardPage {
   private readonly api = inject(ApiService);
-  private readonly realtime = inject(RealtimeService);
+  protected readonly realtime = inject(RealtimeService);
+  private readonly auth = inject(AuthService);
   private readonly exporter = inject(ExportService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -202,6 +207,18 @@ export class DashboardPage {
     { key: 'categoria', label: 'Categoría' },
     { key: 'stock', label: 'Stock total', numeric: true },
   ];
+
+  /** Inserta un evento en la base de datos; llega de vuelta por Realtime a todos los clientes. */
+  protected async simularEvento(): Promise<void> {
+    const tipos: TipoActividad[] = ['venta', 'venta', 'alta', 'incidencia'];
+    const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+    const importe = tipo === 'venta' ? Math.round(20 + Math.random() * 380) : 0;
+    try {
+      await this.realtime.emitir(tipo, this.auth.session()?.email ?? 'admin', importe);
+    } catch {
+      /* RLS o red: el panel simplemente no recibe el evento */
+    }
+  }
 
   protected exportCsv(): void {
     this.exporter.downloadCsv('panel-stock', this.columnasStock, this.filasStock());

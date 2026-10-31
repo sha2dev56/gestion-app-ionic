@@ -7,11 +7,13 @@ export type Session = {
   email: string;
   nombre: string;
   role: Role;
+  /** Caducidad del token (segundos Unix). Si falta, se lee del propio token. */
+  expiresAt?: number;
 };
 
 /** Usuario del sistema (origen SQL / API REST). */
 export type Usuario = {
-  id: number;
+  id: number | string;
   nombre: string;
   email: string;
   role: Role;
