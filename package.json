@@ -17,7 +17,11 @@
     "test:unit": "ng test --no-watch",
     "test:unit:watch": "ng test --watch",
     "test:e2e": "playwright test",
-    "docs": "compodoc -p tsconfig.app.json -d documentation"
+    "docs": "compodoc -p tsconfig.app.json -d documentation",
+    "prestart": "node scripts/set-env.mjs",
+    "prebuild": "node scripts/set-env.mjs",
+    "pretest:unit": "node scripts/set-env.mjs",
+    "predocs": "node scripts/set-env.mjs"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +38,7 @@
     "@capacitor/keyboard": "8.0.6",
     "@capacitor/status-bar": "8.0.4",
     "@ionic/angular": "^9.0.0",
+    "@supabase/supabase-js": "^2.45.0",
     "chart.js": "^4.5.0",
     "ionicons": "^8.1.0",
     "jspdf": "^3.0.0",

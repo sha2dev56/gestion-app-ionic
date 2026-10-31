@@ -17,6 +17,13 @@ Aplicación Ionic + Angular (standalone, signals, zoneless) para la actividad in
 
 > Todos los datos son sintéticos. Las contraseñas del backend simulado se almacenan únicamente como hash SHA-256.
 
+## Backend: Supabase
+
+- **SQL / REST:** tablas `productos` y `profiles` consumidas con PostgREST (`@supabase/supabase-js`), con Row Level Security.
+- **Tiempo real (NoSQL-like):** tabla `actividad` con Supabase Realtime (`postgres_changes`).
+- **Autenticación:** Supabase Auth; el rol (`admin`/`user`) se lee de `profiles`.
+- **Configuración:** ejecuta `supabase/schema.sql` en el SQL Editor, copia `.env.example` a `.env.local` con la URL y la clave *anon* (pública, protegida por RLS). En Vercel/GitHub define `SUPABASE_URL` y `SUPABASE_ANON_KEY`. Sin ellas la app usa un backend simulado.
+
 ## Puesta en marcha
 
 ```bash
